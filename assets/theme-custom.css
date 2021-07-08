@@ -1,0 +1,251 @@
+/* FONTS */
+@font-face {
+  font-family: "ogg";
+  src: url("Ogg-ThinItalic.woff2") format("woff2"),
+    url("Ogg-ThinItalic.woff") format("woff");
+}
+
+h1 {
+  letter-spacing: 1px;
+  font-weight: 200;
+}
+
+h2 {
+  letter-spacing: 3px;
+  font-weight: 200;
+  font-size: 30px;
+}
+
+h3 {
+  letter-spacing: 1px;
+  font-weight: 200;
+}
+
+p {
+  letter-spacing: 1px;
+  font-weight: 200;
+  font-size: 20px;
+}
+
+/* BUTTONS */
+.image-with-text__button {
+  font-family: ogg;
+  font-size: 18px;
+  text-transform: initial;
+  padding: 0.4rem 3rem;
+  color: #000000;
+  background-color: transparent;
+  border: 1px solid #000000;
+  min-width: 220px;
+}
+
+.richtext-section__button {
+  font-family: ogg;
+  font-size: 18px;
+  text-transform: initial;
+  padding: 0.4rem 3rem
+} 
+
+.product-thumbnail__quickshop-button {
+  font-family: ogg;
+  font-size: 18px;
+  max-width: 70%;
+  text-transform: initial;
+  margin-left: auto;
+  margin-right: auto;
+  color: #2980A2;
+  background-color: #ffffff;
+  border: transparent;
+  padding: 0.4rem;
+}
+
+.product-thumbnail__quickshop-button:hover {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+@media screen and (min-width: 768px)
+  .site-header.site-header--sticky {
+    padding: 20px 56px 10px;
+    border-bottom: 0.1vh solid #000000;
+  }
+
+a:-webkit-any-link {
+  text-decoration: none;
+}
+
+/* HOMEPAGE */
+
+/* Second Hand Goods*/ 
+@media only screen and (min-width: 768px) {
+  #shopify-section-1624361461376bb6b6 h2:before {
+    background-size: contain;
+    content: 'STYLISH & SUSTAINABLE';
+    height: 50px;
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    top: 5vh;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    font-size: 15px;
+    letter-spacing: 0px;
+  }
+}
+
+/* Featured Collection */
+@media screen and (min-width: 768px) {
+  section.featured-collection {
+    margin: 3.5rem 12rem;
+  }
+}
+
+.product-thumbnail__info {
+  padding-top: 0.5rem;
+  font-size: 1.0rem;
+  text-align: center;
+}
+
+/* Image with Text Sections */
+.image-with-text__heading {
+  margin: 0 0 2rem;
+}
+
+/* Featured Promotions */
+@media screen and (min-width: 768px) {
+  section.featured-promotions {
+    margin: 8rem 12rem;
+  }
+}
+
+.featured-promotions__content-wrapper--overlay-solid {
+  background: none;
+}
+
+/* We're Carla + Kelly Section */
+#shopify-section-16243628608fb151a6 h2 {
+  font-size: 15px;
+}
+
+#shopify-section-16243628608fb151a6 p {
+  font-family: ogg;
+  font-size: 32px;
+}
+
+/* Visit Us Section */
+#shopify-section-162436308461acf5b3 h2 {
+  border-bottom: 1px solid #cccccc;
+  outline: 6px solid transparent;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 18px;
+  max-width: 22%;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+
+/* FOOTER */
+@media screen and (min-width: 768px) {
+  .footer-section {
+    margin-top: 4rem;
+    padding-top: 4rem;
+  }
+
+  .footer-section p {
+    font-size: 15px;
+  }
+}
+
+.footer-top {
+  padding: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.footer-bottom__wrapper {
+  padding-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.footer-bottom__left
+margin-top: -3rem;
+}
+}
+
+.footer-bottom__wrapper {
+  border-top: none;
+}
+
+.footer-top__block-heading {
+  display: none;
+}
+
+.footer-top__block--newsletter_form .newsletter-form__bottom-half input[type=email] {
+  border-color: white;
+}
+
+input[type=text], input[type=email], input[type=password], input[type=search], input[type=telephone], input[type=tel], input[type=number], textarea {
+  font-family: Helvetica;
+  font-weight: 200;
+  padding: 0.75rem 1rem 0.75rem 0rem;
+  color: #ffffff;
+  background: transparent;
+  border-bottom: 1px solid #ffffff;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+}
+
+input.newsletter-form__contact-email {
+  color: #ffffff;
+}
+
+.newsletter-form__sign-up {
+  font-family: ogg;
+  font-size: 14px;
+  text-transform: initial;
+  color: #ffffff;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  transition: none;
+  max-width: 70%;
+  padding: 6px 16px;
+}
+
+.newsletter-form__sign-up:hover {
+  color: #BDCDDB;
+  box-shadow: 0px 0px;
+  border; 0px;
+}
+
+.footer-bottom__left strong {
+  font-family: 'ogg';
+  font-size: 20px;
+}
+
+.footer-bottom__credits {
+  font-size: 10px;
+  font-family: 'Helvetica';
+}
+
+
+/* COLLECTION PAGES */
+
+@media screen and (min-width: 768px) {
+  .collection-list-page__heading {
+    padding-bottom: 22px;
+    padding-top: 0px;
+  }
+}
+
+.collection-list-page__heading {
+  font-size: 30px;
+}
+
+.collection-list-card__title {
+  font-size: 16px;
+  text-transform: uppercase;
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="{{ shop.locale }}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="robots" content="index,follow">
+
+    {% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %}{% endif %}
+    <title>{% if template contains "index" %}{{ page_title }}{% else %}{{ page_title }}{% if current_tags %} {{ 'general.meta.tagged_html' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} {{ 'general.meta.page' | t: page_number: current_page }}{% endif %}{% unless page_title contains shop.name %} - {{ shop.name }}{% endunless %}{% endif %}</title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}{% if current_tags %} {{ 'general.meta.tagged_html' | t: tags: meta_tags | escape }}.{% endif %}{% if current_page != 1 %} {{ 'general.meta.page' | t: page_number: current_page }}.{% endif %}"/>
+    {% endif %}
+
+    {% render 'social-meta-info' %}
+
+    {% if collection.previous_product %}
+      <link rel="prev" href="{{ collection.previous_product }}">
+    {% endif %}
+    {% if collection.next_product %}
+      <link rel="next" href="{{ collection.next_product }}">
+    {% endif %}
+
+    <!-- Mobile Specific Metas -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.shop_bg_color }}">
+
+    <!-- Preconnect Domains -->
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://monorail-edge.shopifysvc.com">
+
+    <!-- Preload Assets -->
+    <link rel="preload" href="{{ 'theme.css' | asset_url }}" as="style">
+    <link rel="preload" href="{{ 'retina.js' | asset_url }}" as="script">
+
+    <!-- Stylesheets for Retina-->
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    
+    <!-- THIS IS MY CUSTOM CSS -->
+ 	{{ 'theme-custom.css' | asset_url | stylesheet_tag }}
+	<!-- END NEW CODE -->
+
+    {% if settings.favicon != nil %}
+      <link rel="shortcut icon" type="image/x-icon" href="{{ settings.favicon | img_url: '180x180' }}">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | img_url: '180x180' }}"/>
+      <link rel="apple-touch-icon" sizes="72x72" href="{{ settings.favicon | img_url: '72x72' }}"/>
+      <link rel="apple-touch-icon" sizes="114x114" href="{{ settings.favicon | img_url: '114x114' }}"/>
+      <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon | img_url: '180x180' }}"/>
+      <link rel="apple-touch-icon" sizes="228x228" href="{{ settings.favicon | img_url: '228x228' }}"/>
+    {% else %}
+      <link rel="shortcut icon" type="image/x-icon" href="{{ 'favicon.png' | asset_url }}">
+    {% endif %}
+
+    <link rel="canonical" href="{{ canonical_url }}"/>
+
+    {% if template contains 'customer' %}
+      <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+      <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
+    {% endif %}
+
+    {% if settings.show_shipping_calculator %}
+      <script src="{{ '/services/javascripts/countries.js' }}" defer></script>
+    {% endif %}
+
+    {% comment %}Inject theme-object begin{% endcomment %}
+    <script>
+      window.Theme = window.Theme || {};
+      window.Theme.version = '5.0.1';
+      window.Theme.name = 'Retina';
+    </script>
+    {% comment %}Inject theme-object end{% endcomment %}
+
+
+    <script>
+      {% render 'js-variables' %}
+    </script>
+
+    <script src="{{ 'retina.js' | asset_url }}" defer></script>
+
+    {{ content_for_header }}
+
+    <script>
+      document.documentElement.className=document.documentElement.className.replace(/\bno-js\b/,'js');
+      if(window.Shopify&&window.Shopify.designMode)document.documentElement.className+=' in-theme-editor';
+    </script>
+    
+  </head>
+
+  <body
+    class="{{ template | replace: '.', '-' | handle }}"
+    data-money-format="
+      {%- if settings.currency_format == 'money_with_currency_format' -%}
+        {{ shop.money_with_currency_format | strip_html }}
+      {%- else -%}
+        {{ shop.money_format | strip_html }}
+      {%- endif -%}
+    "
+    style="--full-header-height: 0;"
+    data-active-currency="{{ cart.currency.iso_code }}"
+    data-shop-url="{{ shop.url }}"
+    data-predictive-search="{{ settings.enable_autocomplete }}"
+  >
+    <a class="skip-to-main" href="#main-content">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+    {% section 'header' %}
+
+    <main
+      id="main-content"
+      class="main-content--section-headings-{{ settings.section_heading_position }}"
+      role="main"
+    >
+      <div class="main__wrapper">
+        {{ content_for_layout }}
+      </div>
+    </main>
+
+    {% section 'footer' %}
+
+    {% if settings.newsletter_popup %}
+      {% render 'newsletter-popup' %}
+    {% endif %}
+
+    {% if settings.size_chart != blank and template contains 'product' %}
+      {% render 'size-chart-popup' %}
+    {% endif %}
+
+    {% render 'modal' %}
+    {% render 'gallery-modal' %}
+    {% render 'predictive-search' %}
+
+    {% if settings.cart_action == 'ajax' %}
+      {% render 'cart-drawer' %}
+    {% endif %}
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function() {
+        (function () {
+          function handleFirstTab(e) {
+            if (e.keyCode === 9) { // the "I am a keyboard user" key
+              document.body.classList.add('user-is-tabbing');
+              window.removeEventListener('keydown', handleFirstTab);
+            }
+          }
+          window.addEventListener('keydown', handleFirstTab);
+        })();
+      });
+    </script>
+  </body>
+</html>

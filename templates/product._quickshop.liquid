@@ -1,0 +1,35 @@
+{% layout none %}
+
+{%- assign collection_handles = product.collections | map: 'handle' -%}
+
+<template data-data>
+  {
+    "product": {{ product | json }},
+    "variantInventory": { {%- for v in product.variants -%}"{{v.id}}": {"inventory_quantity":{{v.inventory_quantity}},"inventory_management":"{{v.inventory_management}}","inventory_policy":"{{v.inventory_policy}}"}{% if forloop.last == false %},{% endif %}{%- endfor -%} },
+    "mediaCount": {{ product.media.size | json }},
+    "selectFirstAvailableVariant": {{ settings.select_first_available_variant | json }},
+    "soldOutOptions": {{ settings.sold_out_options | json }},
+    "thumbnailsEnabled": {{ settings.enable_thumbnails | json }},
+    "thumbnailSliderEnabled": {{ settings.enable_thumbnail_slider | json }},
+    "thumbnailsPosition": {{ settings.thumbnail_position | json }},
+    "thumbnailsArrowsEnabled": {{ settings.gallery_arrows | json }},
+    "slideshowAnimation": {{ settings.slideshow_transition | json }},
+    "slideshowSpeed": {{ settings.slideshow_speed | json }},
+    "zoomEnabled": {{ settings.activate_zoom | json }},
+    "loopingEnabled": {{ settings.video_looping | json }}
+  }
+</template>
+
+<template data-html="content">
+  <div class="product-quickshop">
+    {%
+      render 'product',
+      product: product,
+      select_first_available_variant: settings.select_first_available_variant,
+      template: 'product-quickshop',
+      collection_handles: collection_handles,
+      quickshop: true,
+      show_payment_button_quickshop: settings.show_payment_button
+    %}
+  </div>
+</template>

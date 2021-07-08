@@ -1,0 +1,64 @@
+{%- capture _ -%}
+  {% comment %}
+    @param color_name {string}
+      Color name for which to find a suitable background
+
+    @param swatch_product {product} [Optional - required if using variant images]
+      Product from which to use variant images.
+
+    @param swatch_option_key {string} [Optional - required if using variant images]
+      option that contains swatch variants, one of `option1`, `option2`, or `option3`.
+
+    Outputs a string CSS background properties
+  {% endcomment %}
+
+  {%- assign swatch_product = swatch_product | default: blank -%}
+  {%- assign swatch_option_key = swatch_option_key | default: blank -%}
+
+  {%- assign swatch_bg_color = blank -%}
+  {%- assign swatch_bg_image = blank -%}
+  {%- assign swatch_bg_variables = blank -%}
+  {%- assign swatch_colors = settings.swatches_custom_colors -%}
+
+  {% comment %} First look for a defined custom color {% endcomment %}
+  {%- assign swatch_colors = swatch_colors | newline_to_br | strip_newlines | split: '<br />' -%}
+  {%- assign swatch_search_color = color_name | downcase -%}
+  {%- for swatch_option in swatch_colors -%}
+    {%- assign swatch_color = swatch_option | split: ':' -%}
+    {%- assign swatch_color_name = swatch_color[0] | strip | downcase -%}
+    {%- assign swatch_color_value = swatch_color[1] | strip -%}
+    {%- if swatch_search_color == swatch_color_name -%}
+      {% capture swatch_bg_color %}
+        background-color: {{ swatch_color_value }};
+      {% endcapture %}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {% comment %} Otherwise default to the raw color name, which will either be a
+  valid named HTML color and displayed as such, or will be ignored by the browser. {% endcomment %}
+  {%- if swatch_bg_color == blank -%}
+    {% capture swatch_bg_color %}
+      background-color: {{ color_name | handleize }};
+    {% endcapture %}
+  {%- endif -%}
+
+  {%- if swatch_product != blank and swatch_option_key != blank -%}
+    {% for variant in swatch_product.variants %}
+      {% comment %} Then look for a pattern image. {% endcomment %}
+      {% assign swatch_file_name = color_name | downcase | handleize | append: '.png' %}
+      {%- if images[swatch_file_name] != blank -%}
+        {%- capture swatch_image_resolution -%}{{ swatch_size | times: 2 }}x{{ swatch_size | times: 2 }}{%- endcapture -%}
+        {%- assign swatch_file_url = swatch_file_name | file_img_url: swatch_image_resolution, crop: 'center' -%}
+        {%- capture swatch_bg_image -%}
+          background-image: url('{{- swatch_file_url  -}}');
+        {%- endcapture -%}
+      {%- endif -%}
+    {% endfor %}
+  {%- endif -%}
+
+{%- endcapture -%}
+{{ swatch_bg_color }}
+{{ swatch_bg_image }}
+/* variables */
+{{ swatch_bg_variables }}

@@ -1,0 +1,67 @@
+<nav
+  class="navigation-mobile navigation-mobile-filters"
+  data-mobile-filters
+  tabindex="-1"
+  aria-label="{{ 'layout.general.menu' | t }}"
+>
+  <div class="navigation-mobile__overlay" data-mobile-overlay></div>
+  <div
+    class="
+      navigation-mobile__flyout
+      navigation-mobile-filters__flyout
+    "
+    data-mobile-main-flyout
+  >
+    <div class="navigation-mobile__flyout-header">
+      <div class="navigation-mobile__flyout-title">
+        {{ 'collections.sidebar.tags' | t }}
+      </div>
+      <button
+        class="navigation-mobile__close-button"
+        data-mobile-nav-close
+        aria-label="{{ 'general.accessibility.close' | t }}"
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 13L13 1M13 13L1 1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    <ul class="mobile-menu mobile-menu-filters">
+      {% assign collection_all_title = '' %}
+      {% if collection.handle != 'all' %}
+        {% assign collection_all_title = collection.title %}
+      {% endif %}
+
+      <li class="mobile-menu__tier-1-item">
+        <a
+          class="
+            mobile-menu__tier-1-link
+            navigation-mobile-filters__link
+            {% unless current_tags %}navigation-mobile-filters__link--active{% endunless %}
+          "
+          href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}"
+        >
+          {{ 'collections.general.all_collection_title' | t: title: collection_all_title }}
+        </a>
+      </li>
+      {% for tag in collection.all_tags %}
+        <li class="mobile-menu__tier-1-item">
+          <a
+            {% if current_tags contains tag %}
+              href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}"
+            {% else %}
+              href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}"
+            {% endif %}
+            class="
+              mobile-menu__tier-1-link
+              navigation-mobile-filters__link
+              {% if current_tags contains tag %}navigation-mobile-filters__link--active{% endif %}
+            "
+          >
+            {{ tag }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</nav>

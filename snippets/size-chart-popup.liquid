@@ -1,0 +1,13 @@
+<div class="product__size-chart" data-size-chart>
+  {% if settings.size_chart != blank %}
+    {% if settings.size_chart_title %}
+      <h3 class="product__size-chart-heading">{{ pages[settings.size_chart].title | escape }}</h3>
+    {% endif %}
+    {{ pages[settings.size_chart].content }}
+  {% else %}
+    {% if settings.size_chart_title %}
+      <h3 class="product__size-chart-heading">{{ pages[size_chart].title | escape }}</h3>
+    {% endif %}
+      {{ pages[size_chart].content }}
+  {% endif %}
+</div>

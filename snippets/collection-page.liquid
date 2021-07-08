@@ -1,0 +1,242 @@
+<script
+  type="application/json"
+  data-section-type="collection-page"
+  data-section-id="{{ section.id }}"
+  data-section-data
+>
+  {
+    "show_secondary_media": {{ settings.collection_secondary_image | json }}
+  }
+</script>
+
+<section
+  class="
+    collection-page
+    {% if section.settings.collection_tags %}collection-page--with-tag-filters{% endif %}
+    {% if section.settings.collection_sort %}collection-page--with-sorting{% endif %}
+  "
+  data-section-id="{{ section.id }}"
+>
+  <div class="collection-page__header-wrapper">
+    {% render 'breadcrumbs' %}
+
+    <div class="collection-page__header">
+      <h1 class="collection-page__heading">{{ collection.title | escape }}</h1>
+    </div>
+
+    {% if collection.description != blank %}
+      <div class="collection-page__description">
+        {{ collection.description }}
+      </div>
+    {% endif %}
+  </div>
+
+  {% paginate collection.products by section.settings.pagination_limit %}
+  {% if section.blocks.size > 0 or section.settings.collection_tags %}
+    <div class="section-with-sidebar__wrapper">
+      <aside
+        class="
+          sidebar
+          collection-page__sidebar
+          {% if section.settings.sidebar_mobile_position == 'below' %}collection-page__sidebar--hide-mobile{% endif %}
+        "
+        data-sidebar
+        data-sidebar-top
+        aria-label="{{ 'general.accessibility.sidebar' | t }}"
+        {% if section.settings.toggle %}data-has-toggle="true"{% endif %}
+        style="--filter-bar-height: 1rem;"
+      >
+        {% if section.settings.collection_tags %}
+          {%- assign tag_count = collection.all_tags | size -%}
+
+          <div
+            class="
+              sidebar__block
+              collection-page__sidebar-tags
+            "
+          >
+            {% if section.settings.toggle %}
+              <a
+                href="#"
+                class="sidebar__block-toggle"
+                data-sidebar-toggle
+                data-open="false"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="sidebar-content-{{ block.id }}"
+              >
+            {% endif %}
+            <h2 class="sidebar__block-heading">
+              {{ 'collections.sidebar.tags' | t }}
+            </h2>
+            {% if section.settings.toggle %}
+              </a>
+            {% endif %}
+            <div
+              class="sidebar__block-content"
+              {% if section.settings.toggle %}data-animation-state="closed"{% endif %}
+            >
+              {% if tag_count > 0 %}
+                {% assign collection_all_title = '' %}
+                {% if collection.handle != 'all' %}
+                  {% assign collection_all_title = collection.title %}
+                {% endif %}
+
+                <ul class="sidebar__tag-list">
+                  <li>
+                    <a
+                      class="
+                        sidebar__tag-link
+                        {% unless current_tags %}sidebar__tag-link--active{% endunless %}
+                      "
+                      href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}"
+                    >
+                      {{ 'collections.general.all_collection_title' | t: title: collection_all_title }}
+                    </a>
+                  </li>
+                  {% for tag in collection.all_tags %}
+                    <li>
+                      <a
+                        class="
+                          sidebar__tag-link
+                          {% if current_tags contains tag %}sidebar__tag-link--active{% endif %}
+                        "
+                        {% if current_tags contains tag %}
+                          href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}"
+                        {% else %}
+                          href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}"
+                        {% endif %}
+                      >
+                        {{ tag }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% else %}
+                <p>{{ 'collections.sidebar.no_tags' | t }}</p>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% render 'sidebar-content' %}
+      </aside>
+  {% endif %}
+
+  {% if section.settings.collection_tags and tag_count > 0 %}
+    {% render 'navigation-mobile-filters' %}
+  {% endif %}
+
+  <div class="collection-page__content">
+    {% if collection.products.size == 0 %}
+      <div class="collection-page__empty">
+        <p>{{ 'collections.general.no_matches' | t }}</p>
+      </div>
+    {% else %}
+
+      {%- assign products = collection.products -%}
+      {%- assign products_per_row = section.settings.products_per_row -%}
+
+      {% if collection.handle != blank and collection.products_count > 0 and section.settings.collection_tags or section.settings.collection_sort %}
+        <div class="collection-page__filters" data-collection-filters>
+          {% if section.settings.collection_tags and collection.handle != 'vendors' %}
+            <button class="collection-page__tag-filter" data-mobile-filters-button>
+              {{ 'collections.sorting.filter' | t }}
+            </button>
+          {% endif %}
+
+          {% if section.settings.collection_sort %}
+            {% for option in collection.sort_options %}
+              {% if option.value == collection.default_sort_by %}
+                {% assign default_option = option.name %}
+              {% endif %}
+              {% if option.value == collection.sort_by %}
+                {% assign selected_option = option.name %}
+              {% endif %}
+            {% endfor %}
+            {% if selected_option == blank %}
+              {% assign selected_option = default_option %}
+            {% endif %}
+
+            <div class="collection-page__sort-filter">
+              <div class="disclosure sort-filter" data-sort-by-disclosure>
+                <button
+                  type="button"
+                  class="disclosure__toggle sort-filter__toggle"
+                  aria-expanded="false"
+                  aria-controls="sort-list"
+                  data-disclosure-toggle
+                >
+                  {{ 'collections.sorting.title' | t }}: <span class="sort-filter__toggle-selected-text">{{ selected_option }}</span>
+                </button>
+                <ul
+                  id="sort-list"
+                  class="
+                    disclosure-list
+                    sort-filter__list
+                  "
+                  data-disclosure-list
+                >
+                  {% for option in collection.sort_options %}
+                    {% assign sort_link = '/collections/' %}
+
+                    <li>
+                      <a
+                        class="disclosure-list__item {% if option.value == collection.sort_by %}disclosure-list__item--current{% endif %}"
+                        href="/collections/{{ collection.handle }}/{{ current_tags }}?sort_by={{ option.value }}"
+                        aria-current="{% if option.value == collection.sort_by %}true{% else %}false{% endif %}"
+                        data-value="{{ option.value }}"
+                      >
+                        <span class="disclosure-list__option">{{ option.name }}</span>
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <div
+        class="
+          collection-page__list
+          collection-page__list--{{ section.settings.products_per_row }}-column
+          collection-page__list--{{ settings.mobile_products_per_row }}-column-mobile
+        "
+      >
+        {% for product in products %}
+          {%
+            render 'product-thumbnail',
+            product: product
+          %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {%
+      render 'pagination',
+      paginate: paginate
+    %}
+  </div>
+
+  {% if section.blocks.size > 0 %}
+    </div>
+  {% endif %}
+  {% endpaginate %}
+
+  {% if section.settings.sidebar_mobile_position == 'below' %}
+    <aside
+      class="
+        sidebar
+        collection-page__bottom-sidebar
+      "
+      data-sidebar
+      data-sidebar-bottom
+      aria-label="{{ 'general.accessibility.sidebar' | t }}"
+      {% if section.settings.toggle %}data-has-toggle="true"{% endif %}
+    >
+      {% render 'sidebar-content' %}
+    </aside>
+  {% endif %}
+</section>

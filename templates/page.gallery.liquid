@@ -1,0 +1,23 @@
+{% if page.content contains "<!-- split -->" %}
+  <section class="static-page">
+    <div class="static-page__header">
+      <h1 class="static-page__heading">{{ page.title }}</h1>
+    </div>
+
+    {%- assign columns = page.content | split: '<!-- split -->' -%}
+
+    <div class="static-page__wrapper static-page__wrapper--1-column" data-rich-text-area>
+      <div class="static-page__column">
+        {{ page.content | split: "<!-- split -->" | last }}
+      </div>
+    </div>
+  </section>
+{% else %}
+  {% assign title = page.title %}
+{% endif %}
+
+{%
+  render 'include-image-gallery',
+  type: 'gallery',
+  title: title
+%}
