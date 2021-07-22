@@ -111,6 +111,22 @@
       {% if collection.products.size > 0 %}
 
         {% for product in collection.products limit: limit %}
+          {% if object.settings.include_text_block == true and forloop.index0 == 2 %}
+          <style>
+            .feat-collection-text,
+            .feat-collection-text a {
+              color: {{ object.settings.text_block_color }};
+            }
+            .feat-collection-text a {
+              text-decoration: underline;
+              text-decoration-color: {{ object.settings.text_block_color }};
+              text-decoration-thickness: 1px;
+            }
+          </style>
+            <div class="feat-collection-text">
+              {{ object.settings.text_block }}
+            </div>
+          {% endif %}
           {% render 'product-thumbnail', product: product %}
         {% endfor %}
 
