@@ -64,6 +64,32 @@ p {
   background-color: #ffffff;
 }
 
+.contact-form__submit  {
+  font-family: ogg;
+  font-size: 18px;
+  text-transform: initial;
+  padding: 0.4rem 5rem;
+  color: #000000;
+  background-color: transparent;
+  border: 1px solid #000000;
+  min-width: 220px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+} 
+
+.login-template__login-button {
+  font-family: ogg;
+  font-size: 18px;
+  text-transform: initial;
+  margin-left: auto;
+  margin-right: auto;
+  color: #ffffff;
+  background-color: #2980A2;
+  border: transparent;
+  padding: 0.4rem;
+}
+
 @media screen and (min-width: 768px)
   .site-header.site-header--sticky {
     padding: 20px 56px 10px;
@@ -77,19 +103,28 @@ a:-webkit-any-link {
 /* HOMEPAGE */
 
 /* Second Hand Goods*/ 
-@media only screen and (min-width: 768px) {
+#shopify-section-1624361461376bb6b6 h2:before {
+  background-size: contain;
+  content: 'STYLISH & SUSTAINABLE';
+  height: 50px;
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 5vh;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  font-size: 15px;
+  letter-spacing: 0px;
+}
+
+
+@media only screen and (max-width: 767px) {
   #shopify-section-1624361461376bb6b6 h2:before {
     background-size: contain;
     content: 'STYLISH & SUSTAINABLE';
-    height: 50px;
-    pointer-events: none;
-    position: absolute;
-    left: 50%;
-    top: 5vh;
-    transform: translate(-50%, -50%);
     width: 300px;
-    font-size: 15px;
-    letter-spacing: 0px;
+    font-size: 13px;
+    padding-bottom: 5vh;
   }
 }
 
@@ -106,9 +141,35 @@ a:-webkit-any-link {
   text-align: center;
 }
 
+.feat-collection-text strong {
+  font-family: ogg;
+}
+
+.feat-collection-text p {
+  font-size: 18px;
+}
+
+.feat-collection-text em {
+  font-style: normal;
+  font-size: 16px;
+}
+
+
 /* Image with Text Sections */
 .image-with-text__heading {
   margin: 0 0 2rem;
+}
+
+#shopify-section-1624362514157652d9 h2.image-with-text__heading {
+  font-family: 'Helvetica';
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+#shopify-section-1624362657f35a1c86 h2.image-with-text__heading {
+  font-family: 'Helvetica';
+  font-size: 22px;
+  text-transform: uppercase;
 }
 
 /* Featured Promotions */
@@ -231,6 +292,10 @@ input.newsletter-form__contact-email {
   font-family: 'Helvetica';
 }
 
+.footer-top__block-menu {
+    padding-left: 10vh;
+}
+
 
 /* COLLECTION PAGES */
 
@@ -248,4 +313,113 @@ input.newsletter-form__contact-email {
 .collection-list-card__title {
   font-size: 16px;
   text-transform: uppercase;
+}
+
+
+/* ABOUT PAGE */
+#shopify-section-page-details-template h2#block__page-details-template-1 {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+@media only screen and (min-width: 768px) {
+  #block__page-details-template-1 h2.richtext-section__heading:before {
+    background-size: contain;
+    content: 'MEET THE RECOLLECTIVE';
+    height: 50px;
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    top: 5vh;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    font-size: 15px;
+    letter-spacing: 0px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #shopify-section-page-details-template h2.richtext-section__heading:before {
+    background-size: contain;
+    content: 'MEET THE RECOLLECTIVE';
+    width: 300px;
+    font-size: 13px;
+    padding-bottom: 5vh;
+  }
+}
+
+h2.image-with-text__heading {
+  font-family: ogg;
+  text-transform: capitalize;
+  font-size: 32px;
+}
+
+#block__3f125457-193c-42aa-b4bf-1a3e9866ca3d h2 {
+  font-size: 16px;
+  margin-top: 5vh;
+}
+
+#block__3f125457-193c-42aa-b4bf-1a3e9866ca3d p {
+  font-family: ogg;
+  font-size: 20px
+}
+
+
+/* CONTACT PAGE */
+label {
+  font-weight: 200;
+}
+
+.contact-form__submit {
+  margin-top: 40px;
+}
+
+input[type=text], input[type=email], input[type=password], input[type=search], input[type=telephone], input[type=tel], input[type=number], textarea {
+  border-bottom: 1px solid #ccc;
+}
+
+
+/* FAQ PAGE */
+#shopify-section-page-faq-template .image-with-text-overlay__heading {
+  max-width: 250px;
+}
+
+.accordion dt a {
+  font-weight: 200;
+  font-family: 'Helvetica';
+}
+
+/* LOGIN PAGE */
+#customer_register_link {
+font-family: ogg;
+    font-size: 18px;
+    text-transform: initial;
+}
+
+/* CART DRAWER POP-OUT */
+.cart-drawer__details p {
+  font-size: 12px;
+}
+    
+#checkout.cart-drawer__checkout {
+  font-family: ogg;
+  text-transform: initial;
+}
+
+.cart-drawer__view-cart {
+  font-family: ogg;
+  text-transform: initial;
+}
+
+
+/* CART PAGE */    
+#checkout.cart-template__add-to-cart.add_to_cart {
+  font-family: ogg;
+  text-transform: initial;
+}
+
+.shipping-calculator__button {
+  font-family: ogg;
+  text-transform: initial;
 }

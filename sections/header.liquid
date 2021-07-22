@@ -89,13 +89,13 @@
               {% comment %}Inject @pixelunion/shopify-cross-border/multi-language begin{% endcomment %}
               {% comment %} Generate a "random" number so ids are unique {% endcomment %}
               {% assign unique_id = "now" | date: "%N" | modulo: 1000 %}
-              
+
               <div class="selectors-form__item">
                 <div class="disclosure" data-disclosure-locale>
                   <h2 class="visually-hidden" id="lang-heading-{{ unique_id }}">
                     {{ 'general.language.dropdown_label' | t }}
                   </h2>
-              
+
                   <button
                     type="button"
                     class="disclosure__toggle"
@@ -119,20 +119,20 @@
                 </div>
               </div>
               {% comment %}Inject @pixelunion/shopify-cross-border/multi-language end{% endcomment %}
-          
+
             {% endif %}
-          
+
             {% if currency_selector and form.available_currencies.size > 1 %}
               {% comment %}Inject @pixelunion/shopify-cross-border/multi-currency begin{% endcomment %}
               {% comment %} Generate a "random" number so ids are unique {% endcomment %}
               {% assign unique_id = "now" | date: "%N" | modulo: 1000 %}
-              
+
               <div class="selectors-form__item">
                 <div class="disclosure" data-disclosure-currency>
                   <h2 class="visually-hidden" id="currency-heading-{{ unique_id }}">
                     {{ 'general.currency.dropdown_label' | t }}
                   </h2>
-              
+
                   <button
                     type="button"
                     class="disclosure__toggle"
@@ -156,7 +156,7 @@
                 </div>
               </div>
               {% comment %}Inject @pixelunion/shopify-cross-border/multi-currency end{% endcomment %}
-          
+
             {% endif %}
           {% endform %}
           {% comment %}Inject @pixelunion/shopify-cross-border/cross-border end{% endcomment %}
@@ -269,21 +269,30 @@
           </svg>
         </a>
       {% endif %}
-      {% if shop.customer_accounts_enabled %}
+
         <a
           href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
-          class="header-controls__account"
+          class="header-controls__account main-nav__tier-1-link"
           aria-label="{{ 'layout.customer.my_account' | t }}"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7ZM17 7C17 9.76142 14.7614 12 12 12C9.23858 12 7 9.76142 7 7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7ZM5 21C5 17.4421 8.10096 14.5 12 14.5C15.899 14.5 19 17.4421 19 21C19 21.2761 19.2239 21.5 19.5 21.5C19.7761 21.5 20 21.2761 20 21C20 16.8259 16.3852 13.5 12 13.5C7.61477 13.5 4 16.8259 4 21C4 21.2761 4.22386 21.5 4.5 21.5C4.77614 21.5 5 21.2761 5 21Z" fill="currentColor"/>
-          </svg>
+        {% if customer %}
+        Account
+        {%- comment -%}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7ZM17 7C17 9.76142 14.7614 12 12 12C9.23858 12 7 9.76142 7 7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7ZM5 21C5 17.4421 8.10096 14.5 12 14.5C15.899 14.5 19 17.4421 19 21C19 21.2761 19.2239 21.5 19.5 21.5C19.7761 21.5 20 21.2761 20 21C20 16.8259 16.3852 13.5 12 13.5C7.61477 13.5 4 16.8259 4 21C4 21.2761 4.22386 21.5 4.5 21.5C4.77614 21.5 5 21.2761 5 21Z" fill="currentColor"/>
+        </svg>
+        {%- endcomment -%}
+      {% else %}
+        Login
         </a>
       {% endif %}
-      <a href="{{ routes.cart_url }}" class="header-controls__cart" {% unless template contains 'cart' %}data-cart-drawer-open{% endunless %} aria-label="{{ 'layout.general.continue_shopping' | t }}">
+      <a href="{{ routes.cart_url }}" class="header-controls__cart main-nav__tier-1-link" {% unless template contains 'cart' %}data-cart-drawer-open{% endunless %} aria-label="{{ 'layout.general.continue_shopping' | t }}">
+        Cart
+        {%- comment -%}
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M10.03 4.81237L6.67989 9.00002H16.5993L13.2491 4.81237C13.0766 4.59673 13.1116 4.28209 13.3272 4.10958C13.5429 3.93708 13.8575 3.97204 14.03 4.18767L17.8799 9.00002H18.2787C19.5145 9.00002 20.4546 10.1098 20.2514 11.3288L18.9181 19.3288C18.7574 20.2932 17.923 21 16.9453 21H6.33383C5.35615 21 4.52177 20.2932 4.36104 19.3288L3.02771 11.3288C2.82453 10.1098 3.76462 9.00002 5.00049 9.00002H5.39926L9.24914 4.18767C9.42164 3.97204 9.73629 3.93708 9.95192 4.10958C10.1676 4.28209 10.2025 4.59673 10.03 4.81237ZM17.6356 10C17.6385 10 17.6413 10 17.6442 10H18.2787C18.8966 10 19.3666 10.5549 19.265 11.1644L17.9317 19.1644C17.8513 19.6466 17.4342 20 16.9453 20H6.33383C5.84499 20 5.4278 19.6466 5.34743 19.1644L4.0141 11.1644C3.91251 10.5549 4.38256 10 5.00049 10H5.63496H5.64355H17.6356Z" fill="currentColor"/>
         </svg>
+        {%- endcomment -%}
         <span class="header-controls__cart-count" data-header-cart-count>
           {{ cart.item_count }}
         </span>
