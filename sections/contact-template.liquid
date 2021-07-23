@@ -23,7 +23,7 @@
 
   {% comment %}Inject @pixelunion/pxs-image-with-text/image-with-text begin{% endcomment %}
   {% comment %}
-  
+
     # General
     @param section {Object}
       Section object
@@ -33,9 +33,9 @@
       A string of inline styles to place on the section element. Useful for adding CSS variables.
     @param base_name {String} Default: 'image-with-text'
       A base name to use for all classes, and section type.
-  
+
     # Section Settings
-  
+
     @param section_heading {String} Optional
       Section heading above the image
     @param section_style {String} Optional
@@ -46,9 +46,9 @@
       Section/image height on desktop
     @param mobile_height {String} Optional
       Section/image height on mobile
-  
+
     # Image Settings
-  
+
     @param image {Image} Required
       Section image
     @param desktop_image_alignment {String} Optional
@@ -61,9 +61,9 @@
       Overlay opacity for Image with Text Overlay. Used for inline style.
     @param overlay_color {String} Optional
       Overlay color. Used for inline style
-  
+
     # Text Settings
-  
+
     @param preheading {String} Optional
       Text above the heading
     @param heading {String} Optional
@@ -78,27 +78,27 @@
       Shadow effect on text content (existing setting in some themes)
     @param content_position {String} Optional
       Position of the text content in the container, usually for image with text overlay (ex. top-left, top-center, top-right)
-  
+
     # Button Settings
-  
+
     @param button_label {String} Optional
       Button label on text side of section
     @param button_link {String} Optional
       Button link
     @param button_style {String} Optional
       Button style
-  
+
   {% endcomment %}
-  
+
   {%- assign base_name = base_name | default: 'image-with-text' -%}
-  
-  
-  
+
+
+
   {%- if overlay_opacity > 0 and overlay_color -%}
     {%- assign overlay_opacity = overlay_opacity | times: 0.01 -%}
     {%- assign overlay_color = overlay_color | color_modify: 'alpha', overlay_opacity -%}
   {%- endif -%}
-  
+
   {% capture text_classes %}
     {% if text_alignment != blank %}
       {{ base_name }}-text-alignment-{{ text_alignment }}
@@ -107,7 +107,7 @@
      {{ base_name }}--text-shadow
     {% endif %}
   {% endcapture %}
-  
+
   <section
     class="
       {{ base_name }}
@@ -217,6 +217,18 @@
 
 {% if page.content != blank %}
   {% render 'static-page' %}
+{% endif %}
+
+
+{% if section.settings.contact_form_heading != blank and section.settings.paragraph != blank %}
+  <div id="contact-intro">
+    {% if section.settings.contact_form_heading != blank %}
+      <h2>{{ section.settings.contact_form_heading }}</h2>
+    {% endif %}
+    {% if section.settings.paragraph != blank %}
+      <p>{{ section.settings.paragraph }}</p>
+    {% endif %}
+  </div>
 {% endif %}
 
 {%
@@ -589,6 +601,19 @@
       ],
       "default": "default",
       "info": "Requires use of API key"
+    },
+
+    {
+      "type": "text",
+      "id": "contact_form_heading",
+      "label": "Contact Form Heading",
+      "default": "Contact Us"
+    },
+    {
+      "type": "richtext",
+      "id": "paragraph",
+      "label": "Contact Form Paragraph",
+      "default": "<p>Contact form text...</p>"
     }
   ]
 }

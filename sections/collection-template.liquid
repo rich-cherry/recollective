@@ -1,3 +1,15 @@
+{% if collection.image != blank %}
+  {%
+    render 'rimg'
+    img: collection.image,
+    alt: alt,
+    size: '1500x',
+    lazy: true,
+    crop: crop,
+    class: 'collection_img',
+  %}
+{% endif %}
+
 {% render 'collection-page' %}
 
 {% schema %}
