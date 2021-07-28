@@ -16851,7 +16851,7 @@ input.newsletter-form__contact-email::placeholder {
 
 .feat-collection-text {
   text-align: center;
-  height: 80%;
+  height: 88%;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -16902,7 +16902,38 @@ input.newsletter-form__contact-email::placeholder {
   margin-top: 0;
 }
 
+@media screen and (max-width: 1100px){
+  .feat-collection-text {
+    display: none;
+  }
+}
+
+/* .feat-collection-text p:last-of-type {
+  margin-bottom: 6rem;
+} */
+
 /* Footer */
+.footer-bottom__left p:first-of-type  {
+  font-family: ogg, sans-serif;
+}
+
 p.footer-bottom__credits {
   font-size: 11px !important;
+}
+
+@media screen and (min-width: 576px){
+  .footer-top {
+    padding-top: 4rem;
+  }
+}
+
+/* @media screen and (max-width: 768px){
+  .shopify-section:first-child .image-with-text-overlay--wide {
+    height: 400px;
+  }
+} */
+
+#faq-button-link {
+  width: 100%;
+  text-align: center;
 }
