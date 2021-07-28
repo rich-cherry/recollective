@@ -116,6 +116,7 @@
             .feat-collection-text,
             .feat-collection-text a {
               color: {{ object.settings.text_block_color }};
+              background-color: white;
             }
             .feat-collection-text a {
               text-decoration: underline;
@@ -123,11 +124,14 @@
               text-decoration-thickness: 1px;
             }
           </style>
+          <div>
             <div class="feat-collection-text">
               {{ object.settings.text_block }}
             </div>
+          </div>
+
           {% endif %}
-          {% render 'product-thumbnail', product: product %}
+          {% render 'product-thumbnail', product: product, %}
         {% endfor %}
 
       {% else %}

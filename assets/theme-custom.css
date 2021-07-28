@@ -27,6 +27,12 @@ p {
   font-size: 20px;
 }
 
+@media screen and (max-width: 767px) {
+  p {
+    font-size: 16px;
+  }
+}
+
 /* BUTTONS */
 .image-with-text__button {
   font-family: ogg;
@@ -100,6 +106,7 @@ a:-webkit-any-link {
   text-decoration: none;
 }
 
+
 /* HOMEPAGE */
 
 /* Second Hand Goods*/
@@ -133,6 +140,10 @@ a:-webkit-any-link {
   section.featured-collection {
     margin: 3.5rem 12rem;
   }
+}
+
+.featured-collection__description {
+  display: none;
 }
 
 .product-thumbnail__info {
@@ -185,7 +196,9 @@ a:-webkit-any-link {
 
 /* We're Carla + Kelly Section */
 #shopify-section-16243628608fb151a6 h2 {
+  font-family: Helvetica;
   font-size: 15px;
+  text-transform: uppercase;
 }
 
 #shopify-section-16243628608fb151a6 p {
@@ -193,55 +206,72 @@ a:-webkit-any-link {
   font-size: 32px;
 }
 
-/* Visit Us Section */
-#shopify-section-162436308461acf5b3 h2 {
-  border-bottom: 1px solid #cccccc;
-  outline: 6px solid transparent;
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 18px;
-  max-width: 22%;
-  font-size: 20px;
-  letter-spacing: 2px;
+@media screen and (max-width: 767px) {
+  #shopify-section-16243628608fb151a6 p {
+    font-family: ogg;
+    font-size: 20px;
+  }
+
+  /* Visit Us Section */
+  #shopify-section-162436308461acf5b3 h2 {
+    border-bottom: 1px solid #cccccc;
+    outline: 6px solid transparent;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 18px;
+    max-width: 22%;
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+
+  @media screen and (max-width: 767px) {
+    #shopify-section-162436308461acf5b3 h2 {
+      max-width: 52%;
+    }
+  }
+
+
+  /* FOOTER */
+  @media screen and (min-width: 768px) {
+    .footer-section {
+      margin-top: 4rem;
+      padding-top: 4rem;
+    }
+    .footer-top {
+      margin-top: 2vh;
+      margin-right: 0;
+    }
+    .footer-section p {
+      font-size: 15px;
+    }
+    .footer-bottom__wrapper {
+      margin-left: 0;
+    }
+    .footer-bottom {
+      padding: 0;
+    }
+    .footer-bottom__wrapper {
+      padding-top: 0px;
+      margin: 0;
+    }
+  }
+  .footer-bottom__left
+  margin-top: -3rem;
 }
-
-
-/* FOOTER */
-@media screen and (min-width: 768px) {
-  .footer-section {
-    margin-top: 4rem;
-    padding-top: 4rem;
-  }
-
-  .footer-section p {
-    font-size: 15px;
-  }
 }
 
 .footer-top {
-  padding: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
+  padding: 0vh;
+  margin-left: 2vh;
+  margin-right: 2vh;
 }
 
-.footer-bottom__wrapper {
-  padding-top: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-}
-
-.footer-bottom__left
-margin-top: -3rem;
-}
-}
-
-.footer-bottom__wrapper {
-  border-top: none;
-}
-
+@media screen and (min-width: 768px) {
 .footer-top__block-heading {
   display: none;
 }
+}
+
 
 .footer-top__block--newsletter_form .newsletter-form__bottom-half input[type=email] {
   border-color: white;
@@ -293,7 +323,7 @@ input.newsletter-form__contact-email {
 }
 
 .footer-top__block-menu {
-    padding-left: 10vh;
+  padding-left: 10vh;
 }
 
 
@@ -323,36 +353,28 @@ input.newsletter-form__contact-email {
   display: flex;
 }
 
-/* @media only screen and (min-width: 768px) {
-  #block__page-details-template-1 h2.richtext-section__heading:before {
-    background-size: contain;
-    content: '';
-    height: 50px;
-    pointer-events: none;
-    position: absolute;
-    left: 50%;
-    top: 5vh;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    font-size: 15px;
-    letter-spacing: 0px;
-  }
+#block__b9767656-7321-406a-ab13-21856038f630 {
+  margin: 3vh auto -2.5em;
 }
 
-@media only screen and (max-width: 767px) {
-  #shopify-section-page-details-template h2.richtext-section__heading:before {
-    background-size: contain;
-    content: '';
-    width: 300px;
-    font-size: 13px;
-    padding-bottom: 5vh;
+@media screen and (max-width: 767px) {
+  .richtext-section__heading {
+    margin-top: 1.5vh;
   }
-} */
+}
 
 h2.image-with-text__heading {
   font-family: ogg;
   text-transform: capitalize;
-  font-size: 32px;
+  font-size: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .image-with-text--wide .image-with-text__content-wrapper {
+    padding: 1.5rem 6.5rem;
+  }
 }
 
 #block__3f125457-193c-42aa-b4bf-1a3e9866ca3d h2 {
@@ -392,9 +414,14 @@ input[type=text], input[type=email], input[type=password], input[type=search], i
 
 /* LOGIN PAGE */
 #customer_register_link {
-font-family: ogg;
-    font-size: 18px;
-    text-transform: initial;
+  font-family: ogg;
+  font-size: 18px;
+  text-transform: initial;
+}
+
+/* MOBILE MENU POP-OUT */
+.navigation-mobile__flyout-header {
+  margin-bottom: 4vh;
 }
 
 /* CART DRAWER POP-OUT */
@@ -423,3 +450,4 @@ font-family: ogg;
   font-family: ogg;
   text-transform: initial;
 }
+
